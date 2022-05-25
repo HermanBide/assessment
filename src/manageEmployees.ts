@@ -1,17 +1,46 @@
-class TreeNode {
-    constructor(value = null) {
+import { getBoss, getSubordinates } from './getEmployees';
+import { IEmployeeData,IEmployeeObj } from './IEmployee';
+
+export class TreeNode {
+    value: any;
+    descendants: TreeNode[];
+    constructor(value: string = null) {
         this.value = value
         this.descendants = []
     }
 }
 
+
 /**
  * Normalizes the provided JSON file and generates a tree of employees.
  *
- * @param {Object[]} employees array of employees
+ * @param {IEmployeeData[]} employeesData array of employees
  * @returns {TreeNode}
  */
-function generateCompanyStructure() {}
+export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode {
+    console.log('Normalizing JSON file...');
+    let employeeTree: TreeNode;
+
+    for (const employee of employeesData.employees) {
+        let name: any = employee.name
+        if (name.split('').includes('@')) {
+            const firstName: string = name.split('@')[0]
+            name = firstName.charAt(0).toUpperCase() + firstName.slice(1)
+        }
+        
+        if (!employee.boss) {
+            employeeTree = new TreeNode(name)
+            continue
+        } else {
+            const employeeNode: TreeNode = new TreeNode(name)
+            //adding to boss
+            const bossNode: any = getBoss(employeeTree, employee.boss)
+            bossNode.descendants.push(employeeNode)
+        }
+    }
+    return employeeTree
+}
+
 
 /**
  * Adds a new employee to the team and places them under a specified boss.
@@ -21,7 +50,11 @@ function generateCompanyStructure() {}
  * @param {string} bossName
  * @returns {void}
  */
-function hireEmployee() {}
+export function hireEmployee(tree: TreeNode, newEmployee: IEmployeeObj, bossName: string): void {
+    const newbie: TreeNode = new TreeNode(newEmployee.name)
+    const bossNode: any = getBoss(tree, bossName)
+    bossNode.descendants.push(newbie)
+}
 
 /**
  * Removes an employee from the team by name.
@@ -31,7 +64,28 @@ function hireEmployee() {}
  * @param {string} name employee's name
  * @returns {void}
  */
-function fireEmployee() {}
+export function fireEmployee(tree: TreeNode, name: string): void {
+    let employee = getBoss(tree, name)
+    if(!employee) {
+        return  
+    } 
+
+    const queue: TreeNode[] = [tree]
+    while (queue.length) {
+        const currNode: TreeNode = queue.shift()
+        for (let i = 0; i < currNode.descendants.length; i++) {
+            const desc: TreeNode = currNode.descendants[i] 
+            console.log(currNode)
+            if(desc.value === name) {
+                desc.value = null
+                // return currNode.descendants
+            }  else {
+                    desc.descendants[i++]
+                }
+        }
+        queue.push(...currNode.descendants)
+    }
+}
 
 /**
  * Promotes an employee one level above their current ranking.
@@ -41,8 +95,27 @@ function fireEmployee() {}
  * @param {string} employeeName
  * @returns {void}
  */
-function promoteEmployee() {}
+export function promoteEmployee(tree: TreeNode, employeeName: string): void {
+    let employee = getBoss(tree, employeeName)
+    if(!employee) {
+        return  
+    } 
 
+    const queue: TreeNode[] = [tree]
+
+    while (queue.length) {
+        const currNode: TreeNode = queue.shift()
+        for (let i = 0; i < currNode.descendants.length; i++) {
+            const desc: TreeNode = currNode.descendants[i] 
+            if(desc.value === employeeName) {
+                let temp = desc.value 
+                desc.value = currNode.value
+                currNode.value = temp
+            }  
+        }
+        queue.push(...currNode.descendants)
+    }
+}
 /**
  * Demotes an employee one level below their current ranking.
  * Picks a subordinat and swaps places in the hierarchy.
@@ -52,4 +125,49 @@ function promoteEmployee() {}
  * @param {string} subordinateName the new boss
  * @returns {void}
  */
-function demoteEmployee() {}
+export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
+    const subordinate = getSubordinates(tree, subordinateName)
+    if(!subordinate) {
+        return 
+    } else {
+        subordinate
+    }
+    // console.log(subordinate)
+    const employee = getBoss(tree, employeeName)
+    if(!employee) {
+        return
+    }
+
+
+    // let demote: TreeNode [] = employee.value
+    // employee.value = subordinate
+    // subordinate = demote
+
+    const queue: TreeNode [] = [tree] 
+
+    while(queue.length) {
+        const currNode: TreeNode = queue.shift();
+        for (let i = 0; i < currNode.descendants.length; i++){
+            const desc: TreeNode = currNode.descendants[i] 
+            // console.log(desc.value)
+            for( let j = 0; j < desc.descendants.length; j++) {
+                const  employees: TreeNode = desc.descendants[j]
+                // console.log(employees.value)
+                if(employees.value === subordinate && desc.value === employee) {
+                    let newboss = employees.value
+                    employees.value = desc.value
+                    desc.value = newboss    
+                }
+            }
+        }
+        // queue.push(...currNode.descendants)
+        console.log(...currNode.descendants)
+
+        }
+    }
+
+
+
+function temp(temp: any) {
+    throw new Error('Function not implemented.');
+}
