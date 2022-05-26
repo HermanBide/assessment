@@ -60,7 +60,7 @@ export function hireEmployee(tree: TreeNode, newEmployee: IEmployeeObj, bossName
  * Removes an employee from the team by name.
  * If the employee has other employees below them, randomly selects one to take their place.
  *
- * @param {TreeNode} tree
+ * @param {TreeNode} tree    
  * @param {string} name employee's name
  * @returns {void}
  */
@@ -75,15 +75,25 @@ export function fireEmployee(tree: TreeNode, name: string): void {
         const currNode: TreeNode = queue.shift()
         for (let i = 0; i < currNode.descendants.length; i++) {
             const desc: TreeNode = currNode.descendants[i] 
-            console.log(currNode)
-            if(desc.value === name) {
-                desc.value = null
-                // return currNode.descendants
-            }  else {
-                    desc.descendants[i++]
-                }
+            // console.log(desc.value) 
+            if(desc.value.name === name) {
+                //    currNode.remove(desc.value)
+            }
+
+        // for( let j = 0; j < desc.descendants.length; j++) {
+        //         const employees: TreeNode = desc.descendants[j]
+        //         console.log(employees.value)
+        //         if(employees.value.name === "Sal" ) {
+        //             employees.value =
+        //             // employee = desc.value
+        //             // desc.value = temp
+        //         }
+
+        // } 
+
         }
         queue.push(...currNode.descendants)
+        // console.dir(currNode, {depth:null, color:true})      
     }
 }
 
@@ -114,6 +124,7 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
             }  
         }
         queue.push(...currNode.descendants)
+
     }
 }
 /**
@@ -126,45 +137,38 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
  * @returns {void}
  */
 export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
-    const subordinate = getSubordinates(tree, subordinateName)
-    if(!subordinate) {
-        return 
-    } else {
-        subordinate
-    }
-    // console.log(subordinate)
-    const employee = getBoss(tree, employeeName)
-    if(!employee) {
-        return
-    }
 
-
-    // let demote: TreeNode [] = employee.value
-    // employee.value = subordinate
-    // subordinate = demote
-
-    const queue: TreeNode [] = [tree] 
+    const queue: TreeNode[] = [tree] 
 
     while(queue.length) {
         const currNode: TreeNode = queue.shift();
         for (let i = 0; i < currNode.descendants.length; i++){
             const desc: TreeNode = currNode.descendants[i] 
             // console.log(desc.value)
-            for( let j = 0; j < desc.descendants.length; j++) {
-                const  employees: TreeNode = desc.descendants[j]
-                // console.log(employees.value)
-                if(employees.value === subordinate && desc.value === employee) {
-                    let newboss = employees.value
-                    employees.value = desc.value
-                    desc.value = newboss    
-                }
-            }
-        }
-        // queue.push(...currNode.descendants)
-        console.log(...currNode.descendants)
+            if(desc.value === employeeName) {
+                let temp = desc.value;
+                let tempTwo = ""
+                desc.value = subordinateName
 
+                for(let j = 0; j < desc.descendants.length; j++) {
+                    const employee: TreeNode = desc.descendants[j] 
+                    // console.log(employee)
+                    if(employee.value === subordinateName ) {
+                        // console.log('employee ', employee)
+                        let tempTwo = employee.value 
+                        console.log('desc ', desc.descendants[j])
+                        break
+                    }
+                }
+                
+                // subordinateName = temp
+            } 
+        queue.push(...currNode.descendants)
+        // console.dir(currNode, {depth:null, color:true})
         }
     }
+}
+    
 
 
 
