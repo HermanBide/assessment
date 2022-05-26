@@ -27,7 +27,6 @@ export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode
             const firstName: string = name.split('@')[0]
             name = firstName.charAt(0).toUpperCase() + firstName.slice(1)
         }
-        
         if (!employee.boss) {
             employeeTree = new TreeNode(name)
             continue
@@ -50,12 +49,13 @@ export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode
  * @param {string} bossName
  * @returns {void}
  */
-export function hireEmployee(tree: TreeNode, newEmployee: IEmployeeObj, bossName: string): void {
-    const newbie: TreeNode = new TreeNode(newEmployee.name)
-    const bossNode: any = getBoss(tree, bossName)
-    bossNode.descendants.push(newbie)
+export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: string): void {
+    const newbie: TreeNode = new TreeNode(newEmployee)
+    const bossNode: TreeNode = getBoss(tree, bossName)
+    if(bossNode.value === bossName) {
+        bossNode.descendants.push(newbie)
+    }
 }
-
 /**
  * Removes an employee from the team by name.
  * If the employee has other employees below them, randomly selects one to take their place.
@@ -65,8 +65,8 @@ export function hireEmployee(tree: TreeNode, newEmployee: IEmployeeObj, bossName
  * @returns {void}
  */
 export function fireEmployee(tree: TreeNode, name: string): void {
-    let employee = getBoss(tree, name)
-    if(!employee) {
+    let subordinates = getSubordinates(tree, name)
+    if(!subordinates) {
         return  
     } 
 
@@ -75,27 +75,20 @@ export function fireEmployee(tree: TreeNode, name: string): void {
         const currNode: TreeNode = queue.shift()
         for (let i = 0; i < currNode.descendants.length; i++) {
             const desc: TreeNode = currNode.descendants[i] 
-            // console.log(desc.value) 
-            if(desc.value.name === name) {
-                //    currNode.remove(desc.value)
+            for(let j = 0; j < desc.descendants.length; j++) {
+                const employee: TreeNode = desc.descendants[j] 
+                if(desc.value === name && employee.value === "Sal") {
+                    let temp =  desc.value
+                    desc.value = employee.value
+                    employee.value = delete temp.value 
+                } 
             }
-
-        // for( let j = 0; j < desc.descendants.length; j++) {
-        //         const employees: TreeNode = desc.descendants[j]
-        //         console.log(employees.value)
-        //         if(employees.value.name === "Sal" ) {
-        //             employees.value =
-        //             // employee = desc.value
-        //             // desc.value = temp
-        //         }
-
-        // } 
-
         }
         queue.push(...currNode.descendants)
         // console.dir(currNode, {depth:null, color:true})      
     }
 }
+
 
 /**
  * Promotes an employee one level above their current ranking.
@@ -145,29 +138,31 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
         for (let i = 0; i < currNode.descendants.length; i++){
             const desc: TreeNode = currNode.descendants[i] 
             // console.log(desc.value)
-            if(desc.value === employeeName) {
-                let temp = desc.value;
-                let tempTwo = ""
-                desc.value = subordinateName
+            // if() {
+            //     let temp = desc.value;
+            //     let tempTwo = ""
+            //     desc.value = subordinateName
 
                 for(let j = 0; j < desc.descendants.length; j++) {
                     const employee: TreeNode = desc.descendants[j] 
                     // console.log(employee)
-                    if(employee.value === subordinateName ) {
+                    if(desc.value === employeeName && employee.value === subordinateName ) {
                         // console.log('employee ', employee)
-                        let tempTwo = employee.value 
-                        console.log('desc ', desc.descendants[j])
+                        let temp = desc.value 
+                        desc.value = employee.value
+                        employee.value = temp
+                        // console.log('desc ', desc.descendants[j])
                         break
                     }
                 }
-                
+
                 // subordinateName = temp
             } 
         queue.push(...currNode.descendants)
         // console.dir(currNode, {depth:null, color:true})
         }
     }
-}
+
     
 
 
