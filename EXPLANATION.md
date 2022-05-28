@@ -6,10 +6,10 @@
 
 ### Bonus
   **Time Complexity**
-    -getBoss (Best case time complexity of 0(1) )
-    -getSubordinates (worst case time complexity of 0(n) )
-    -fireEmployee (Avg case time complexity of 0(n) )
-    -hireEmployee (Best case time complexity of 0(n) )
+    -getBoss ( 0(1) )
+    -getSubordinates ( 0(n) )
+    -fireEmployee ( 0(n) )
+    -hireEmployee (0(n) )
     -promoteEmployee
     -demoteEmployee
 
