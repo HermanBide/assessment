@@ -7,9 +7,9 @@ import { IEmployeeData,IEmployeeObj } from './IEmployee';
 function main() {
     const companyTree = generateCompanyStructure(employeesData)
     console.dir(companyTree, {depth:null, color:true})
-    const hire = hireEmployee(companyTree, "Jeb", "Sarah")
-    const fire = fireEmployee(companyTree, "Alicia")
-    const sub = promoteEmployee(companyTree, "Jared")
+    // const hire = hireEmployee(companyTree, "Jeb", "Sarah")
+    // const fire = fireEmployee(companyTree, "Alicia")
+    // const sub = promoteEmployee(companyTree, "Jared")
     const demote = demoteEmployee(companyTree, "Xavier", "Maria")
     console.dir(companyTree, {depth:null, color:true})
     // promoteEmployee(companyTree,)

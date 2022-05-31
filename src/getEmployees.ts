@@ -14,7 +14,6 @@ export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
     if (employeeName == currNode.value) {
       return currNode
     }
-
     queue.push(...currNode.descendants)
   }
 }

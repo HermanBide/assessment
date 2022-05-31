@@ -65,27 +65,24 @@ export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: stri
  * @returns {void}
  */
 export function fireEmployee(tree: TreeNode, name: string): void {
-    let subordinates = getSubordinates(tree, name)
-    if(!subordinates) {
-        return  
-    } 
-
     const queue: TreeNode[] = [tree]
     while (queue.length) {
         const currNode: TreeNode = queue.shift()
         for (let i = 0; i < currNode.descendants.length; i++) {
             const desc: TreeNode = currNode.descendants[i] 
-            for(let j = 0; j < desc.descendants.length; j++) {
-                const employee: TreeNode = desc.descendants[j] 
-                if(desc.value === name && employee.value === "Sal") {
-                    let temp =  desc.value
-                    desc.value = employee.value
-                    employee.value = delete temp.value 
-                } 
+            if( desc.value === name) {
+                if(desc.descendants.length) {
+                    const employee: TreeNode = desc.descendants[0] 
+                        desc.value = employee.value
+                        desc.descendants.shift()
+                        break
+                } else {
+                    currNode.descendants.splice(i, 1) 
+                    break
+                }
             }
         }
-        queue.push(...currNode.descendants)
-        // console.dir(currNode, {depth:null, color:true})      
+        queue.push(...currNode.descendants)     
     }
 }
 
@@ -137,35 +134,20 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
         const currNode: TreeNode = queue.shift();
         for (let i = 0; i < currNode.descendants.length; i++){
             const desc: TreeNode = currNode.descendants[i] 
-            // console.log(desc.value)
-            // if() {
-            //     let temp = desc.value;
-            //     let tempTwo = ""
-            //     desc.value = subordinateName
-
-                for(let j = 0; j < desc.descendants.length; j++) {
-                    const employee: TreeNode = desc.descendants[j] 
-                    // console.log(employee)
+                if(desc.descendants.length) {
+                    const employee: TreeNode = desc.descendants[0] 
                     if(desc.value === employeeName && employee.value === subordinateName ) {
-                        // console.log('employee ', employee)
                         let temp = desc.value 
                         desc.value = employee.value
                         employee.value = temp
-                        // console.log('desc ', desc.descendants[j])
                         break
                     }
                 }
-
-                // subordinateName = temp
             } 
         queue.push(...currNode.descendants)
         // console.dir(currNode, {depth:null, color:true})
         }
     }
-
-    
-
-
 
 function temp(temp: any) {
     throw new Error('Function not implemented.');
