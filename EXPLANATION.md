@@ -14,3 +14,6 @@ My first approach was to implement a Typescript interface then proceeded to crea
 
 ### Bonus
 - The demote and promote functions can be merge into one since it only envolves swapping two employees position for one another.
+
+### Running the App
+- clone repo and paste in terminal. Open code and use `yarn start` to run the functions.
