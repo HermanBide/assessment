@@ -66,7 +66,7 @@ export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: stri
 export function fireEmployee(tree: TreeNode, name: string): void {
     const queue: TreeNode[] = [tree]
     while (queue.length) {
-        const currNode: TreeNode = queue.shift()
+        const currNode: TreeNode = queue.shift()  
         for (let i = 0; i < currNode.descendants.length; i++) {
             const desc: TreeNode = currNode.descendants[i] 
             if( desc.value === name) {

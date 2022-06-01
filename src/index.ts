@@ -18,7 +18,6 @@ function main() {
     // console.log(fire)
     // console.log(sub)
     // console.log(demote)
-    // console.dir(companyTree, {depth:null, color:true})
 }
 
 main()
