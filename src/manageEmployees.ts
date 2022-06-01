@@ -32,7 +32,6 @@ export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode
             continue
         } else {
             const employeeNode: TreeNode = new TreeNode(name)
-            //adding to boss
             const bossNode: any = getBoss(employeeTree, employee.boss)
             bossNode.descendants.push(employeeNode)
         }
@@ -100,9 +99,7 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
     if(!employee) {
         return  
     } 
-
     const queue: TreeNode[] = [tree]
-
     while (queue.length) {
         const currNode: TreeNode = queue.shift()
         for (let i = 0; i < currNode.descendants.length; i++) {
@@ -114,7 +111,6 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
             }  
         }
         queue.push(...currNode.descendants)
-
     }
 }
 /**
@@ -127,7 +123,6 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
  * @returns {void}
  */
 export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
-
     const queue: TreeNode[] = [tree] 
 
     while(queue.length) {
@@ -145,7 +140,6 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
                 }
             } 
         queue.push(...currNode.descendants)
-        // console.dir(currNode, {depth:null, color:true})
         }
     }
 
