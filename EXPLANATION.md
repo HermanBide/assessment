@@ -1,7 +1,13 @@
 # README
 
 ## My Approach
-   -My approach was to create a 
+   > GenerateCompanyStructure:
+   > hireEmployee:
+   > fireEmployee:
+   > promoteEmployee:
+   > demoteEmployee:
+   > getBoss:
+   > getSubordinates:
 
 
 ### Bonus
