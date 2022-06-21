@@ -1,5 +1,5 @@
-import { getBoss, getSubordinates } from './getEmployees';
-import { IEmployeeData,IEmployeeObj } from './IEmployee';
+import { getBoss} from './getEmployees';
+import { IEmployeeData} from './IEmployee';
 
 export class TreeNode {
     value: any;
@@ -143,6 +143,4 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
         }
     }
 
-function temp(temp: any) {
-    throw new Error('Function not implemented.');
-}
+

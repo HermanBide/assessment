@@ -9,10 +9,11 @@ My first approach was to implement a Typescript interface then proceeded to crea
 
 ### Bonus
 - **Time Complexity**
+- GenerateCompanyStructure 0(1)
 - getBoss 0(h)  height of the tree 
 - getSubordinates  0(h) height of the tree
-- fireEmployee 0(n) 
-- hireEmployee 0(1)
+- fireEmployee 0(logn) 
+- hireEmployee 0(logn)
 - promoteEmployee 0(n)
 - demoteEmployee 0(n)
 
