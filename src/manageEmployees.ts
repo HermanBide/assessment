@@ -71,13 +71,10 @@ export function fireEmployee(tree: TreeNode, name: string): void {
             const desc: TreeNode = currNode.descendants[i] 
             if( desc.value === name) {
                 if(desc.descendants.length) {
-                    const employee: TreeNode = desc.descendants[0] 
+                    const employee: TreeNode = desc.descendants[1]
                         desc.value = employee.value
-                        desc.descendants.shift()
+                        desc.descendants.splice(i, 1)
                         break
-                } else {
-                    currNode.descendants.splice(i, 1) 
-                    break
                 }
             }
         }
@@ -142,5 +139,3 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
         queue.push(...currNode.descendants)
         }
     }
-
-
