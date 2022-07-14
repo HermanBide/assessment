@@ -17,8 +17,6 @@ search for the employee we are looking to remove from the tree.
 first wanted to conduct a BFS using a queue to get nodes
 if the node in the queue isnt who we are looking for, we shift and go to the next node and compare with the given name that is passed as argument. when we get the name we check its descendants and swap name with one of its descendants then proceed to remove the name and break the loop.
 
-
-
 - hireEmployee 0(logn)
     create a new treenode, push (insert) the new treenode as child (descendant) under rootnode using the getBoss function to call for (parent node). 
 
