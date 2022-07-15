@@ -14,17 +14,16 @@ implement a for loop over
 
 - fireEmployee 0(logn) 
 search for the employee we are looking to remove from the tree.
-first wanted to conduct a BFS using a queue to get nodes
-if the node in the queue isnt who we are looking for, we shift and go to the next node and compare with the given name that is passed as argument. when we get the name we check its descendants and swap name with one of its descendants then proceed to remove the name and break the loop.
+first implemented a BFS using a queue. shift the current node and check if it is the employee we are looking to remove from the tree if no go to the next node and repeat the steps. When we get to the node we are looking for i check to see if it has  descendants, if yes, swap node we want to remove with one of its descendants then proceed to remove the node and break the loop.
 
 - hireEmployee 0(logn)
-    create a new treenode, push (insert) the new treenode as child (descendant) under rootnode using the getBoss function to call for (parent node). 
+    for this function i decide to insert a new treenode as child (descendant) under root node using the getBoss function to call for (parent node). 
 
 - promoteEmployee 0(n)
-For this function, i decided to implement BFS using queue to travese the tree and search for the employee name we want to promote. I would check use shift method to remove current node and check if its value matches name we are looking to promote. once I found the employeeName i would swap positions with their boss 
+For this function, i decided to implement BFS using queue to travese the tree and search for the employee name we want to promote. I use shift method to remove current node and check if its value matches name we are looking to promote if no we check the next node. once I found the employeeName i would swap positions with their boss(parent node) 
 
 - demoteEmployee 0(n)
-For this function, again i decided to implement BFS using queue to travese the tree and search for the employee name we want to demote. I would check use shift method to remove current node and check if its value matches name we are looking to demote. once found i would look to check if they had descendants and if yes i would proceed to swap the employeeName with the SubordinateName
+For this function, again i decided to implement BFS using queue to travese the tree and search for the employee name we want to demote. I used shift method to remove current node and check if its value matches the me i am looking to demote. Then, i checked if the current node has descendants if yes, i would proceed to swap the employeeName  that matches the current node with the (child)SubordinateName that matches the name at index we are looking to swap.
 
 ### Bonus
 - **Time Complexity**

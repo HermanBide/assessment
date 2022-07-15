@@ -82,7 +82,6 @@ export function fireEmployee(tree: TreeNode, name: string): void {
     }
 }
 
-
 /**
  * Promotes an employee one level above their current ranking.
  * The promoted employee and their boss should swap places in the hierarchy.
@@ -91,25 +90,7 @@ export function fireEmployee(tree: TreeNode, name: string): void {
  * @param {string} employeeName
  * @returns {void}
  */
-// export function promoteEmployee(tree: TreeNode, employeeName: string): void {
-//     let employee = getBoss(tree, employeeName)
-//     if(!employee) {
-//         return  
-//     } 
-//     const queue: TreeNode[] = [tree]
-//     while (queue.length) {
-//         const currNode: TreeNode = queue.shift()
-//         for (let i = 0; i < currNode.descendants.length; i++) {
-//             const desc: TreeNode = currNode.descendants[i] 
-//             if(desc.value === employeeName) {
-//                 let temp = desc.value 
-//                 desc.value = currNode.value
-//                 currNode.value = temp
-//             }  
-//         }
-//         queue.push(...currNode.descendants)
-//     }
-// }
+
 
 export function promoteEmployee(tree: TreeNode, employeeName: string): void {
     let employee = getBoss(tree, employeeName)
@@ -143,26 +124,7 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
  * @param {string} subordinateName the new boss
  * @returns {void}
  */
-// export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
-//     const queue: TreeNode[] = [tree] 
 
-//     while(queue.length) {
-//         const currNode: TreeNode = queue.shift();
-//         for (let i = 0; i < currNode.descendants.length; i++){
-//             const desc: TreeNode = currNode.descendants[i] 
-//                 if(desc.descendants.length) {
-//                     const employee: TreeNode = desc.descendants[0] 
-//                     if(desc.value === employeeName && employee.value === subordinateName ) {
-//                         let temp = desc.value 
-//                         desc.value = employee.value
-//                         employee.value = temp
-//                         break
-//                     }
-//                 }
-//             } 
-//         queue.push(...currNode.descendants)
-//         }
-//     }
 
     export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
         const queue: TreeNode[] = [tree] 
