@@ -1,4 +1,4 @@
-import { getBoss} from './getEmployees';
+import { getEmployeeSubtree} from './getEmployees';
 import { IEmployeeData} from './IEmployee';
 
 export class TreeNode {
@@ -32,13 +32,12 @@ export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode
             continue
         } else {
             const employeeNode: TreeNode = new TreeNode(name)
-            const bossNode: any = getBoss(employeeTree, employee.boss)
+            const bossNode: any = getEmployeeSubtree(employeeTree, employee.boss)
             bossNode.descendants.push(employeeNode)
         }
     }
     return employeeTree
 }
-
 
 /**
  * Adds a new employee to the team and places them under a specified boss.
@@ -50,7 +49,7 @@ export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode
  */
 export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: string): void {
     const newbie: TreeNode = new TreeNode(newEmployee)
-    const bossNode: TreeNode = getBoss(tree, bossName)
+    const bossNode: TreeNode = getEmployeeSubtree(tree, bossName)
     if(bossNode.value === bossName) {
         bossNode.descendants.push(newbie)
     }
@@ -82,6 +81,7 @@ export function fireEmployee(tree: TreeNode, name: string): void {
     }
 }
 
+
 /**
  * Promotes an employee one level above their current ranking.
  * The promoted employee and their boss should swap places in the hierarchy.
@@ -90,30 +90,17 @@ export function fireEmployee(tree: TreeNode, name: string): void {
  * @param {string} employeeName
  * @returns {void}
  */
-
-
 export function promoteEmployee(tree: TreeNode, employeeName: string): void {
-    let employee = getBoss(tree, employeeName)
-    if(!employee) {
+    if(!getEmployeeSubtree(tree, employeeName)) {
         return  
     } 
     const queue: TreeNode[] = [tree]
     while (queue.length) {
         const currNode: TreeNode = queue.shift()
-        if(currNode.descendants.length) {
-            for(const desc of currNode.descendants) {
-                if(desc.value === employeeName) {
-                    let temp = desc.value 
-                    desc.value = currNode.value
-                    currNode.value = temp
-                }  
-            }
-        }
+        loopThroughDescendants(currNode, employeeName )
         queue.push(...currNode.descendants)
     }
 }
-
-
 
 /**
  * Demotes an employee one level below their current ranking.
@@ -124,23 +111,36 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
  * @param {string} subordinateName the new boss
  * @returns {void}
  */
+export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
+    const queue: TreeNode[] = [tree] 
+    while(queue.length) {
+        const currNode: TreeNode = queue.shift();
+        loopThroughDescendants(currNode, employeeName, 'demote', subordinateName )
+        queue.push(...currNode.descendants)
+    }
+}
 
-
-    export function demoteEmployee(tree: TreeNode, employeeName: string, subordinateName: string): void {
-        const queue: TreeNode[] = [tree] 
-    
-        while(queue.length) {
-            const currNode: TreeNode = queue.shift();
-            if(currNode.descendants.length) {
-                const desc: TreeNode = currNode.descendants[0]
-                for(const employee of desc.descendants) {
-                    if(desc.value === employeeName && employee.value === subordinateName) {
-                        let temp = desc.value 
-                        desc.value = employee.value
-                        employee.value = temp
-                    }
+function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:string = null , subordinateName: string = null): void{
+    for (const childNode of currNode.descendants){
+        const desc: TreeNode = childNode
+        switch (type) {
+            case 'demote':
+                if(desc.descendants.length && desc.value === employeeName && desc.descendants[0].value === subordinateName ) {
+                    swapEmployees(desc, desc.descendants[0])
+                    return
                 }
-            }                  
-            queue.push(...currNode.descendants)
-            }
+                break;
+            default:
+                if(desc.value === employeeName) {
+                    swapEmployees(desc, currNode)
+                }
+                break;
         }
+    } 
+}
+
+function swapEmployees(employee1: TreeNode, employee2: TreeNode): void {
+    let temp = employee1.value 
+    employee1.value = employee2.value
+    employee2.value = temp
+}

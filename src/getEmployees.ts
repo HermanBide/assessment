@@ -6,13 +6,27 @@ import {TreeNode} from './manageEmployees';
  * @param {string} employeeName
  * @returns {TreeNode}
  */
-export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
+export function getEmployeeSubtree(tree: TreeNode, employeeName: string): TreeNode {
   const queue: [TreeNode] = [tree]
 
   while (queue.length) {
     const currNode: TreeNode = queue.shift()
     if (employeeName == currNode.value) {
       return currNode
+    }
+    queue.push(...currNode.descendants)
+  }
+}
+
+export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
+  const queue: [TreeNode] = [tree]
+
+  while (queue.length) {
+    const currNode: TreeNode = queue.shift()
+    for(const subordinate of currNode.descendants) {
+      if(employeeName === subordinate.value) {
+          return currNode
+      }
     }
     queue.push(...currNode.descendants)
   }
@@ -27,7 +41,7 @@ export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
  * @returns {TreeNode[]}
  */
 export function getSubordinates(tree: TreeNode, employeeName: string): TreeNode[] {
-  const employeeNode = getBoss(tree, employeeName)
+  const employeeNode = getEmployeeSubtree(tree, employeeName)
   if(employeeNode) {
     return employeeNode.descendants
   } else {

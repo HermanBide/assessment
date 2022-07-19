@@ -19,11 +19,14 @@ first implemented a BFS using a queue. shift the current node and check if it is
 - hireEmployee 0(logn)
     for this function i decide to insert a new treenode as child (descendant) under root node using the getBoss function to call for (parent node). 
 
+
+For both promoteEmployee and demoteEmployee function i decided to create helper functions "loop through descendants" and "swapEmployees" functions, to prevent from repeating myself and keep it simple, I implemented the D.R.Y principle. 
+
 - promoteEmployee 0(n)
-For this function, i decided to implement BFS using queue to travese the tree and search for the employee name we want to promote. I use shift method to remove current node and check if its value matches name we are looking to promote if no we check the next node. once I found the employeeName i would swap positions with their boss(parent node) 
+For this function, i decided to implement BFS using queue to travese the tree and search for the employee name we want to promote. I use shift method to remove current node and check if its value matches name we are looking to promote, if it is not the name we are looking for i checked if it has descendants and if yes call the "loop through descendants" function. once I found the employeeName i would call the swapEmployee function to change positions with their boss(parent node) 
 
 - demoteEmployee 0(n)
-For this function, again i decided to implement BFS using queue to travese the tree and search for the employee name we want to demote. I used shift method to remove current node and check if its value matches the me i am looking to demote. Then, i checked if the current node has descendants if yes, i would proceed to swap the employeeName  that matches the current node with the (child)SubordinateName that matches the name at index we are looking to swap.
+For this function, again i decided to implement BFS using queue to travese the tree and search for the employee name we want to demote. I used shift method to remove current node and check if its value matches the employeeName i am looking to demote. Then, i checked if the current node has descendants if yes, i call the "loop through descendants" function.  when i have found the employeeName and SubordinateName i call thge "swapEmployees" function to make the swap
 
 ### Bonus
 - **Time Complexity**
