@@ -1,23 +1,21 @@
 # README
 
 ## My Approach
-My first approach was to implement a Typescript interface then proceeded to create the tree structure using the json data array and stored all employees and their relations as treenodes. I would use a linear structure (queue) to perform FIFO and check root node descendants use a BFS travesal to traverse the tree to insert, delete, search, to get bosses and their subordinates. I would implement a for loop to split and slice employees whos names where filled in with their email to just store their first name. I would call on the getBoss function inside functions like promoteEmployee to find the employees boss and store new hires as boss descendants.
+My first approach was to implement a Typescript interface then proceeded to create the tree structure using the json data array and stored all employees and their employee subtrees as treenodes. I would use a data structure (queue) to perform FIFO and check root node subtrees use a BFS travesal to traverse the tree to insert, delete, search, swap and to get bosses and their subordinates. I implement a for loop to split and slice employees whos names where filled in with their email to just store their first name. I would call on the getEmployeeStructure function inside the generateCompanyStructure function to create our tree.
 
-- GenerateCompanyStructure 0(1)
-if name included '@' to get name before '@' and remove the rest.
 
-- getBoss 0(h)  height of the tree 
+- getBoss 0(h)  height of the tree, the function to get parent node of employee in subtree
 
 
 - getSubordinates  0(h) height of the tree
-implement a for loop over 
+implement a for loop to find the given employee's subtree
 
 - fireEmployee 0(logn) 
 search for the employee we are looking to remove from the tree.
 first implemented a BFS using a queue. shift the current node and check if it is the employee we are looking to remove from the tree if no go to the next node and repeat the steps. When we get to the node we are looking for i check to see if it has  descendants, if yes, swap node we want to remove with one of its descendants then proceed to remove the node and break the loop.
 
 - hireEmployee 0(logn)
-    for this function i decide to insert a new treenode as child (descendant) under root node using the getBoss function to call for (parent node). 
+    for this function i decide to insert a new treenode as child (descendant) under root node using the getEmployeeStructure function to call for (parent node). 
 
 
 For both promoteEmployee and demoteEmployee function i decided to create helper functions "loop through descendants" and "swapEmployees" functions, to prevent from repeating myself and keep it simple, I implemented the D.R.Y principle. 
@@ -39,7 +37,7 @@ For this function, again i decided to implement BFS using queue to travese the t
 - demoteEmployee 0(n)
 
 ### Bonus
-- The demote and promote functions can be merge into one since it only envolves swapping two employees position for one another.
+- The demote and promote functions can be merge into one since it only envolves swapping two employees position for one another. The swapEmployee function called when making the swaps.
 
 ### Running the App
 - clone repo and paste in terminal. Open code and use `yarn start` to run the functions.
