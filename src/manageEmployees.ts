@@ -69,9 +69,9 @@ export function fireEmployee(tree: TreeNode, name: string): void {
             const desc: TreeNode = currNode.descendants[i];
             if (desc.value === name && desc.descendants.length) {
                 const employee: TreeNode = desc.descendants[1];
-                    desc.value = employee.value;
-                    desc.descendants.splice(i, 1);
-                    break;
+                desc.value = employee.value;
+                desc.descendants.splice(i, 1);
+                break;
             };
         };
         queue.push(...currNode.descendants);   
@@ -117,6 +117,13 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
     };
 };
 
+/**
+ * @param {TreeNode} tree
+ * @param {string} employeeName the employee getting demoted
+ * @param {string} subordinateName the new boss
+ * @returns {void}
+ */
+
 function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:string = null , subordinateName: string = null): void{
     for (const childNode of currNode.descendants) {
         const desc: TreeNode = childNode;
@@ -136,6 +143,10 @@ function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:s
     }; 
 };
 
+/**
+ * 
+ * @param {TreeNode} tree
+ */
 function swapEmployees(employee1: TreeNode, employee2: TreeNode): void {
     let temp = employee1.value;
     employee1.value = employee2.value;
