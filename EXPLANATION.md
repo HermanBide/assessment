@@ -1,5 +1,5 @@
 # README
-I was aware of some of the linting issues because of time contraint i wasnt able to get to all of them. 
+I was aware of some of the linting issues because of time constraints i wasnt able to get to all of them. 
 
 ## My Approach
 My first approach was to implement a Typescript interface then proceeded to create the tree structure using the json data array and stored all employees and their employee subtrees as treenodes. I would use a data structure (queue) to perform FIFO and check root node subtrees use a BFS travesal to traverse the tree to insert, delete, search, swap and to get bosses and their subordinates. I implement a for loop to split and slice employees whos names where filled in with their email to just store their first name. I would call on the getEmployeeStructure function inside the generateCompanyStructure function to create our tree.
