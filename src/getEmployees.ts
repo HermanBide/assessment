@@ -7,30 +7,30 @@ import {TreeNode} from './manageEmployees';
  * @returns {TreeNode}
  */
 export function getEmployeeSubtree(tree: TreeNode, employeeName: string): TreeNode {
-  const queue: [TreeNode] = [tree]
+  const queue: [TreeNode] = [tree];
 
   while (queue.length) {
-    const currNode: TreeNode = queue.shift()
+    const currNode: TreeNode = queue.shift();
     if (employeeName == currNode.value) {
-      return currNode
-    }
-    queue.push(...currNode.descendants)
-  }
-}
+      return currNode;
+    };
+    queue.push(...currNode.descendants);
+  };
+};
 
 export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
-  const queue: [TreeNode] = [tree]
+  const queue: [TreeNode] = [tree];
 
   while (queue.length) {
-    const currNode: TreeNode = queue.shift()
-    for(const subordinate of currNode.descendants) {
-      if(employeeName === subordinate.value) {
-          return currNode
-      }
-    }
-    queue.push(...currNode.descendants)
-  }
-}
+    const currNode: TreeNode = queue.shift();
+    for (const subordinate of currNode.descendants) {
+      if (employeeName === subordinate.value) {
+          return currNode;
+      };
+    };
+    queue.push(...currNode.descendants);
+  };
+};
 
 /**
  * Given an employee, will find the nodes directly below (if any).
@@ -41,13 +41,13 @@ export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
  * @returns {TreeNode[]}
  */
 export function getSubordinates(tree: TreeNode, employeeName: string): TreeNode[] {
-  const employeeNode = getEmployeeSubtree(tree, employeeName)
-  if(employeeNode) {
-    return employeeNode.descendants
+  const employeeNode = getEmployeeSubtree(tree, employeeName);
+  if (employeeNode) {
+    return employeeNode.descendants;
   } else {
-    return []
-  }
-}
+    return [];
+  };
+};
 
 /**
  * EXTRA CREDIT:
