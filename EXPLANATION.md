@@ -10,7 +10,7 @@ My first approach was to implement a Typescript interface then proceeded to crea
 - getSubordinates  0(h) height of the tree
 implement a for loop to find the given employee's subtree
 
-- fireEmployee 0(n) 
+- fireEmployee 0(1) 
 search for the employee we are looking to remove from the tree.
 first implemented a BFS using a queue. shift the current node and check if it is the employee we are looking to remove from the tree if no go to the next node and repeat the steps. When we get to the node we are looking for i check to see if it has  descendants, if yes, swap node we want to remove with one of its descendants then proceed to remove the node and break the loop.
 
@@ -31,7 +31,7 @@ For this function, again i decided to implement BFS using queue to travese the t
 - GenerateCompanyStructure 0(1)
 - getBoss 0(h)  height of the tree 
 - getSubordinates  0(h) height of the tree
-- fireEmployee 0(n) 
+- fireEmployee 0(1) 
 - hireEmployee 0(1)
 - promoteEmployee 0(1)
 - demoteEmployee 0(1)
