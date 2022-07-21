@@ -11,7 +11,7 @@ export function getEmployeeSubtree(tree: TreeNode, employeeName: string): TreeNo
 
   while (queue.length) {
     const currNode: TreeNode = queue.shift();
-    if (employeeName == currNode.value) {
+    if (employeeName === currNode.value) {
       return currNode;
     };
     queue.push(...currNode.descendants);

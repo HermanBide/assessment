@@ -148,7 +148,7 @@ function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:s
  * @param {TreeNode} tree
  */
 function swapEmployees(employee1: TreeNode, employee2: TreeNode): void {
-    let temp = employee1.value;
+    const temp = employee1.value;
     employee1.value = employee2.value;
     employee2.value = temp;
 };
