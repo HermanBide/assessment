@@ -9,14 +9,14 @@ import * as employeesData from './employees.json';
  * @returns {TreeNode}
  */
 function main() {
-    const companyTree = generateCompanyStructure(employeesData);
+    const companyTree: any = generateCompanyStructure(employeesData);
     console.dir(companyTree, {depth:null, color:true});
-    const hire = hireEmployee(companyTree, "Jeb", "Sarah");
-    const fire = fireEmployee(companyTree, "Alicia");
-    const promote = promoteEmployee(companyTree, "Jared");
-    const demote = demoteEmployee(companyTree, "Xavier", "Maria");
-    const boss = getBoss(companyTree, "Bill");
-    const sub = getSubordinates(companyTree, "Maria");
+    const hire: any = hireEmployee(companyTree, "Jeb", "Sarah");
+    const fire: any = fireEmployee(companyTree, "Alicia");
+    const promote: any = promoteEmployee(companyTree, "Jared");
+    const demote: any = demoteEmployee(companyTree, "Xavier", "Maria");
+    const boss: any = getBoss(companyTree, "Bill");
+    const sub: any = getSubordinates(companyTree, "Maria");
     console.dir(companyTree, {depth:null, color:true});
     console.log(hire);
     console.log(fire);
