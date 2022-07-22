@@ -1,6 +1,5 @@
 import {TreeNode} from './manageEmployees';
 /**
- * Given an employee, will find the node above (if any).
  * 
  * @param {TreeNode} tree
  * @param {string} employeeName
@@ -18,6 +17,12 @@ export function getEmployeeSubtree(tree: TreeNode, employeeName: string): TreeNo
   };
 };
 
+/** 
+* Given an employee, will find the node above (if any).
+* @param {TreeNode} tree
+ * @param {string} employeeName
+ * @returns {TreeNode}
+ */
 export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
   const queue: [TreeNode] = [tree];
 
@@ -41,7 +46,7 @@ export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
  * @returns {TreeNode[]}
  */
 export function getSubordinates(tree: TreeNode, employeeName: string): TreeNode[] {
-  const employeeNode = getEmployeeSubtree(tree, employeeName);
+  const employeeNode: TreeNode = getEmployeeSubtree(tree, employeeName);
   if (employeeNode) {
     return employeeNode.descendants;
   } else {

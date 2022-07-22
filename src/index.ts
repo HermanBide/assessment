@@ -1,9 +1,13 @@
-import { generateCompanyStructure, promoteEmployee, demoteEmployee, fireEmployee, hireEmployee  } from './manageEmployees';
+import { generateCompanyStructure, promoteEmployee, demoteEmployee, fireEmployee, hireEmployee, TreeNode  } from './manageEmployees';
 import { getSubordinates, getBoss } from './getEmployees'
+// import { IEmployeeData} from './IEmployee';
 import * as employeesData from './employees.json';
 
 
 // Main code goes here
+/**
+ * @returns {TreeNode}
+ */
 function main() {
     const companyTree = generateCompanyStructure(employeesData);
     console.dir(companyTree, {depth:null, color:true});
