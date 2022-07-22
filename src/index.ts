@@ -8,7 +8,7 @@ import * as employeesData from './employees.json';
 /**
  * @returns {TreeNode}
  */
-function main() {
+function main():void {
     const companyTree: any = generateCompanyStructure(employeesData);
     console.dir(companyTree, {depth:null, color:true});
     const hire: any = hireEmployee(companyTree, "Jeb", "Sarah");
