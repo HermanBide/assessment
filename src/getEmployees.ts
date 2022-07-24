@@ -30,6 +30,7 @@ export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
     const currNode: TreeNode = queue.shift();
     for (const subordinate of currNode.descendants) {
       if (employeeName === subordinate.value) {
+          console.log(`\n[getBoss]: ${employeeName}'s boss is ${currNode.value}`);
           return currNode;
       };
     };
@@ -48,6 +49,8 @@ export function getBoss(tree: TreeNode, employeeName: string): TreeNode {
 export function getSubordinates(tree: TreeNode, employeeName: string): TreeNode[] {
   const employeeNode: TreeNode = getEmployeeSubtree(tree, employeeName);
   if (employeeNode) {
+    const employeeDesc = employeeNode.descendants.map(desc => desc.value).join(', ');
+    console.log(`[getSubordinate]: ${employeeName}'s subordinates are ${employeeDesc}`);
     return employeeNode.descendants;
   } else {
     return [];

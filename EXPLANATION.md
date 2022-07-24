@@ -27,7 +27,7 @@ For this function, i decided to implement BFS using queue to travese the tree an
 - demoteEmployee 0(h)
 For this function, again i decided to implement BFS using queue to travese the tree and search for the employee name we want to demote. I used shift method to remove current node and check if its value matches the employeeName i am looking to demote. Then, i checked if the current node has descendants if yes, i call the "loop through descendants" function.  when i have found the employeeName and SubordinateName i call thge "swapEmployees" function to make the swap
 
-findLowestEmployee for this function i would traverse  using BFS  and each time i go down a level i would keep track of the level use a map method and save employees along with their respective level and then when i get to the last level i would look for the last employee.
+findLowestEmployee for this function i would traverse  using BFS  and each time i go down a level i would keep track of the level use a map data structure and save employees along with their respective level and then when i get to the last level i would look for the last employee.
 
 ### Bonus
 - **Time Complexity**

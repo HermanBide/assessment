@@ -1,4 +1,4 @@
-import { getEmployeeSubtree} from './getEmployees';
+import { getBoss, getEmployeeSubtree} from './getEmployees';
 import { IEmployeeData} from './IEmployee';
 
 export class TreeNode {
@@ -19,7 +19,7 @@ export class TreeNode {
 export function generateCompanyStructure(employeesData: IEmployeeData): TreeNode {
     console.log('Normalizing JSON file...');
     let employeeTree: TreeNode;
-
+    console.log('Generating employee tree...\n');
     for (const employee of employeesData.employees) {
         let name: any = employee.name;
         if (name.split('').includes('@')) {
@@ -51,6 +51,10 @@ export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: stri
     const bossNode: TreeNode = getEmployeeSubtree(tree, bossName);
     if(bossNode.value === bossName) {
         bossNode.descendants.push(newbie);
+        // console.log(`Added new employee ${newEmployee} with ${getBoss(tree, newEmployee).value} as their boss`);
+        //TODO
+        // This proof that the employee was added. I comment out the ca
+        console.log(`[hireEmployee]: Added new employee ${newEmployee} with ${bossName} as their boss`);
     };
 };
 /**
@@ -71,6 +75,7 @@ export function fireEmployee(tree: TreeNode, name: string): void {
                 const employee: TreeNode = desc.descendants[1];
                 desc.value = employee.value;
                 desc.descendants.splice(i, 1);
+                console.log(`[fireEmployee]: Fired ${name} and replaced with ${employee.value}`);
                 break;
             };
         };
@@ -92,16 +97,23 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
         return;  
     };
     const queue: TreeNode[] = [tree];
+    let subordinate = "";
     while (queue.length) {
         const currNode: TreeNode = queue.shift();
-        loopThroughDescendants(currNode, employeeName);
+        const employee = loopThroughDescendants(currNode, employeeName);
+        if (employee !== undefined) {
+            subordinate = employee;
+            break;
+        }
         queue.push(...currNode.descendants);
+        // console.log(subordinate)
     };
+    console.log(`[promoteEmployee]: Promoted ${employeeName} and made ${subordinate} his subordinate`);
 };
 
 /**
  * Demotes an employee one level below their current ranking.
- * Picks a subordinat and swaps places in the hierarchy.
+ * Picks a subordinat and swaps places in the hierarchy.s
  *
  * @param {TreeNode} tree
  * @param {string} employeeName the employee getting demoted
@@ -115,28 +127,30 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
         loopThroughDescendants(currNode, employeeName, 'demote', subordinateName);
         queue.push(...currNode.descendants);
     };
+    console.log(`[demoteEmployee]: Demoted ${employeeName} and replaced with ${subordinateName}`);
 };
-
 /**
- * @param {TreeNode} tree
+ * @param {TreeNode} currNode
  * @param {string} employeeName the employee getting demoted
  * @param {string} subordinateName the new boss
- * @returns {void}
+ * @returns {string}
  */
 
-function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:string = null , subordinateName: string = null): void{
+function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:string = null, subordinateName: string = null): string {
+    let subordinate = ""
     for (const childNode of currNode.descendants) {
         const desc: TreeNode = childNode;
         switch (type) {
             case 'demote':
                 if (desc.descendants.length && desc.value === employeeName && desc.descendants[0].value === subordinateName ) {
-                    swapEmployees(desc, desc.descendants[0]);
-                    return;
+                    subordinate = swapEmployees(desc, desc.descendants[0]);
+                    return subordinate;
                 }
                 break;
             default:
                 if (desc.value === employeeName) {
-                    swapEmployees(desc, currNode);
+                    subordinate = swapEmployees(desc, currNode);
+                    return subordinate;
                 };
                 break;
         };
@@ -144,11 +158,13 @@ function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:s
 };
 
 /**
- * 
- * @param {TreeNode} tree
+ * @param {string} employee1
+ * @param {string} employee2 
+ * @returns {string}
  */
-function swapEmployees(employee1: TreeNode, employee2: TreeNode): void {
-    const temp: TreeNode = employee1.value;
+function swapEmployees(employee1: TreeNode, employee2: TreeNode): string {
+    const temp: string = employee1.value;
     employee1.value = employee2.value;
     employee2.value = temp;
+    return employee1.value;
 };
