@@ -97,7 +97,7 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
         return;  
     };
     const queue: TreeNode[] = [tree];
-    let subordinate = "";
+    let subordinate: string = "";
     while (queue.length) {
         const currNode: TreeNode = queue.shift();
         const employee = loopThroughDescendants(currNode, employeeName);
@@ -137,7 +137,7 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
  */
 
 function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:string = null, subordinateName: string = null): string {
-    let subordinate = ""
+    let subordinate: string = ""
     for (const childNode of currNode.descendants) {
         const desc: TreeNode = childNode;
         switch (type) {

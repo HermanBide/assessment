@@ -4,9 +4,7 @@ I was aware of some of the linting issues because of time constraints i wasnt ab
 ## My Approach
 My first approach was to implement a Typescript interface then proceeded to create the tree structure using the json data array and stored all employees and their employee subtrees as treenodes. I would use a data structure (queue) to perform FIFO and check root node subtrees use a BFS travesal to traverse the tree to insert, delete, search, swap and to get bosses and their subordinates. I implement a for loop to split and slice employees whos names where filled in with their email to just store their first name. I would call on the getEmployeeStructure function inside the generateCompanyStructure function to create our tree.
 
-
 - getBoss 0(h) height of the tree, the function to get parent node of employee in subtree
-
 
 - getSubordinates 0(h) height of the tree
 implement a for loop to find the given employee's subtree
@@ -17,7 +15,6 @@ first implemented a BFS using a queue. shift the current node and check if it is
 
 - hireEmployee 0(h)
 For this function i decide to insert a new treenode as child (descendant) under root node using the getEmployeeStructure function to call for (parent node). 
-
 
 For both promoteEmployee and demoteEmployee function i decided to create helper functions "loop through descendants" and "swapEmployees" functions, to prevent from repeating myself and keep it simple, I decided to apply the D.R.Y principle. 
 
