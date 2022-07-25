@@ -12,7 +12,6 @@ export class TreeNode {
 
 /**
  * Normalizes the provided JSON file and generates a tree of employees.
- *
  * @param {IEmployeeData[]} employeesData array of employees
  * @returns {TreeNode}
  */
@@ -53,7 +52,7 @@ export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: stri
         bossNode.descendants.push(newbie);
         // console.log(`Added new employee ${newEmployee} with ${getBoss(tree, newEmployee).value} as their boss`);
         //TODO
-        // This proof that the employee was added. I comment out the ca
+        // This is proof that the employee was added. I comment out the console.log above, i wanted make sure the getboss function was calling the right name.
         console.log(`[hireEmployee]: Added new employee ${newEmployee} with ${bossName} as their boss`);
     };
 };
@@ -106,7 +105,6 @@ export function promoteEmployee(tree: TreeNode, employeeName: string): void {
             break;
         }
         queue.push(...currNode.descendants);
-        // console.log(subordinate)
     };
     console.log(`[promoteEmployee]: Promoted ${employeeName} and made ${subordinate} his subordinate`);
 };
