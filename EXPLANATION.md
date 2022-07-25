@@ -4,7 +4,7 @@ I was aware of some of the linting issues because of time constraints i wasnt ab
 ## Instruction to run code
 fork from the repo, copy code and paste in terminal.
 ensure you have this version of yarn 1.22.19 and node v14.19.3 installed.
-run yarn start in command line  
+run yarn start in command line 
 
 
 ## My Approach logic/style
@@ -38,7 +38,7 @@ For this function, again i decided to implement BFS using queue to travese the t
 
 
 ## If i had more time
-if i had more time i would create a data structure (hashmap) to house employees. The key would be names and value would be an object with level, boss and descendant as properties and i would update the data structure as i am building the tree. 
+if i had more time i would create a data structure (hashmap) to house employees. The key would be names and value would be an object with level, boss and descendant as properties and i would update the data structure as i am building the tree. when implmenting the functions i would get the specific name that i needed from the hashmap as well as their level this will retrieve an employees info in constant time. Also i would add automated unit testing and test will verify that the methods are working correctly.
 
 
 ### Bonus
