@@ -127,13 +127,14 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
     console.log(`[demoteEmployee]: Demoted ${employeeName} and replaced with ${subordinateName}`);
 };
 /**
+ * This function loops through the subtrees. 
+ * Use a switch statment that selects either code block for specific case.
  * @param {TreeNode} currNode
  * @param {string} employeeName the employee getting demoted
  * @param {string} subordinateName the new boss
  * @returns {string}
  */
 
-//This function loops through the subtrees. inside the function we are using a switch statment that selects either code block for specific case.
 function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:string = null, subordinateName: string = null): string {
     let subordinate: string = ""
     for (const childNode of currNode.descendants) {
@@ -156,11 +157,12 @@ function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:s
 };
 
 /**
+ * This function swaps the employeeName we are looking for with the given name we want to swap places with.
  * @param {string} employee1
  * @param {string} employee2 
  * @returns {string}
  */
-//This function swaps the employeeName we are looking for with the given name we want to swap places with.
+
 function swapEmployees(employee1: TreeNode, employee2: TreeNode): string {
     const temp: string = employee1.value;
     employee1.value = employee2.value;
