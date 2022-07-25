@@ -21,7 +21,11 @@ first implementing a BFS using a queue, shift the current node and check if it i
 - hireEmployee 0(h)
 For this function i decide to insert a new treenode as child (descendant) under root node using the getEmployeeStructure function to call for (parent node). 
 
-For both promoteEmployee and demoteEmployee function i decided to create helper functions "loop through descendants" and "swapEmployees" functions, to prevent from repeating myself and keep it simple, I wanted to apply the D.R.Y principle for these functions. 
+For both promoteEmployee and demoteEmployee function i decided to create helper functions "loop through descendants" and "swapEmployees" functions, to prevent from repeating myself and keep it simple, I wanted to apply the D.R.Y principle for these functions.
+
+swapEmployees function we swap the employeeName we are looking for with the name we want to replace swap places with.
+
+The loop through Employees function loops through the nodes in subtrees. inside the function we are using a switch statment that selects either code block for specific case.
 
 - promoteEmployee 0(h)
 For this function, i decided to implement BFS using queue to travese the tree and search for the employee name we want to promote. I use shift method to remove current node and check if its value matches the name we are looking to promote, if it is not the name we are looking for, i checked if it has descendants and if yes, to call the "loop through descendants" function. once I found the employeeName i would call the "swapEmployee" function to change positions with their boss(parent node) 
@@ -33,7 +37,7 @@ For this function, again i decided to implement BFS using queue to travese the t
 
 
 ## If i had more time
-if i had more time i would create a data structure (hashmap) to house Boss, descendants and their levels and update the data structure as i am building the tree. when implmenting the functions i would get the specific name that i needed from the hashmap as well as their level this should make the function run in constant time.
+if i had more time i would create a data structure (hashmap) to house employees and their names key and the employee attributes would be an object, descendants and their levels and update the data structure as i am building the tree. when implmenting the functions i would get the specific name that i needed from the hashmap as well as their level this will retrieve an employees info in constant time. Also i would add automated unit testing and test will verify that the methods are working correctly.
 
 
 ### Bonus

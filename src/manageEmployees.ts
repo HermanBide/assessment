@@ -51,7 +51,6 @@ export function hireEmployee(tree: TreeNode, newEmployee: string, bossName: stri
     if(bossNode.value === bossName) {
         bossNode.descendants.push(newbie);
         // console.log(`Added new employee ${newEmployee} with ${getBoss(tree, newEmployee).value} as their boss`);
-        //TODO
         // This is proof that the employee was added. I comment out the console.log above, i wanted make sure the getboss function was calling the right name.
         console.log(`[hireEmployee]: Added new employee ${newEmployee} with ${bossName} as their boss`);
     };

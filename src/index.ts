@@ -5,7 +5,6 @@ import * as employeesData from './employees.json';
 
 // Main code goes here
 /**
- * @returns {TreeNode}
  * @returns {void}
  */
 function main():void {
