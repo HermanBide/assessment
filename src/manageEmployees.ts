@@ -129,6 +129,7 @@ export function demoteEmployee(tree: TreeNode, employeeName: string, subordinate
 /**
  * This function loops through the subtrees. 
  * Use a switch statment that selects either code block for specific case.
+ * 
  * @param {TreeNode} currNode
  * @param {string} employeeName the employee getting demoted
  * @param {string} subordinateName the new boss
@@ -158,6 +159,7 @@ function loopThroughDescendants(currNode: TreeNode, employeeName: string, type:s
 
 /**
  * This function swaps the employeeName we are looking for with the given name we want to swap places with.
+ * 
  * @param {string} employee1
  * @param {string} employee2 
  * @returns {string}

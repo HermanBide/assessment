@@ -3,8 +3,8 @@ I was aware of some of the linting issues because of time constraints i wasnt ab
 
 ## Instruction to run code
 fork from the repo, copy code and paste in terminal.
-Using this version of yarn 1.22.19 and node v14.19.3 installed.
-run yarn start in command line 
+ensure you have this version of yarn 1.22.19 and node v14.19.3 installed.
+run yarn start in command line  
 
 
 ## My Approach logic/style
